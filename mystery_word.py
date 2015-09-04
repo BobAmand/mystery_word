@@ -64,12 +64,17 @@ def main():
 
     1. Prompts the user for a difficulty level
     2. Sets up the game based upon the difficulty level
+                TOD0: direct to the appropriate word filter function.
     3. Performs the game loop, consisting of:
        a. Printing the word in progress, using _ for unguessed letters
        b. Printing the number of guesses remaining
        c. Printing the letters that have been guessed so far
+                TODO: index those letters guessed and put in place
+                - display grid "[__________]"
+                - character replace in selected word
        d. Prompting the user for a letter to guess
     4. Finishing the game and displaying whether the user has won or lost
+                TODO: 8 try loop
     5. Giving the user the option to play again
     """
     # TODO
