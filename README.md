@@ -5,3 +5,8 @@ Exercise 05 - Mystery Word is an interactive game for guessing words
     Read data into the file (source of easy or hard words to guess)
     Interactive Difficulty setting by user.
     Difficulty setting creating a filter for word length
+
+  - first major problem is loading/reading/copying in the word list
+
+
+'''
