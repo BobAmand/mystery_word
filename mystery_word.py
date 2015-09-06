@@ -1,7 +1,17 @@
 # MYSTERY WORD mystery_word.py
 import re
+import random
 
 def easy_words(word_list):
+    easy_words = []
+    for i in range(len(word_list)):
+        if len(word_list[i]) >= 4 and len(word_list[i]) <= 6:
+            easy_words.append(word_list[i])
+
+    for c in range(10):
+        print(easy_words[c])
+
+
     """
     Returns a filtered version of the word list with words only containing
     4-6 characters.
@@ -43,12 +53,13 @@ def display_word(word, guesses):
     """
     Returns a string that including blanks (_) and letters from the given word,
     filling in letters based upon the list of guesses.
+        # - loop to prompt for 8 guesses
         # - Any size word to be entered
         # - size of the pattern = len(word)
 
     There should be spaces between each blank _ and each letter. Each letter
     should be capitalized for display.
-        # - insert the space with 'sep=' '' embedded function
+        # - insert the space with 'sep=' '' embedded function __.upper()
 
     For example, if the word is BOMBARD and the letters guessed are a, b,
     and d, this function should return 'B _ _ B A _ D'.
@@ -66,27 +77,31 @@ def is_word_complete(word, guesses):
     """
     Returns True if the list of guesses covers every letter in the word,
     otherwise returns False.
-    
+
     """
     # TODO
     pass
 
 
 def main():
-    # Read data in
-
-    # with open('/usr/share/dict/words') as f:
-    #     for i in range(10):
-    #         print(list(f))  #.read().rstrip('\n'))
-
+    diff_level = 'E'            # drive into def easy_words()
     f = open('/usr/share/dict/words')
-    word_list = list(f.read())
+    next = f.read().lower()     # provides lower case list with \n
+    word_list = next.split()
     print(word_list)
+    # return word_list
+    print("returned 'word_list', calling 'easy_words'")
+    easy_words(word_list)
+    # print(word_list)            # word_list is a list of lower case words.
 
-    # print(word_list)
-                #need to strip off the "\n"
+    # if diff_level == 'E':
+    #     easy_words(word_list)
+    # else:
+    #     print("stopped in main()")
 
-    """
+
+
+"""
     Runs when the program is called from the command-line.
     TODO - Load all data from external source '/usr/share/dict/words'
 
@@ -98,13 +113,13 @@ def main():
        b. Printing the number of guesses remaining
        c. Printing the letters that have been guessed so far
                 TODO: index those letters guessed and put in place
-                - display grid "[__________]"
+                - display grid "[_ _ _ _ _ _ _ _ _ _]"
                 - character replace in selected word
        d. Prompting the user for a letter to guess
     4. Finishing the game and displaying whether the user has won or lost
                 TODO: 8 try loop
     5. Giving the user the option to play again
-    """
+"""
     # TODO
 
 if __name__ == '__main__':
