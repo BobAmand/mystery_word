@@ -46,18 +46,12 @@ def random_word(word_list):
 
     random_num = randint(0,len(word_list)-1)
     word = word_list[random_num]
-    print("Random word is: {} ". format(word))
-    #return word
     print("Random word generated: {} ". format(word))
     return word
-
 
     """
     Returns a random word from the word list.
     """
-    # TODO
-    pass
-
 
 def display_word(word, guesses):
     """
@@ -103,9 +97,17 @@ def main():
         print(word_list[i])     # prints only a few, includes \n in list.
     # return word_list
     print("\nFinished 'word_list', \ncalling 'easy_words'")
-    easy_words(word_list)
+    if diff_level == 'E':
+        easy_words_list = easy_words(word_list)
+    elif diff_level == 'N':
+        medium_words(word_list) # TODO medium_words_list function return
+    elif diff_level == 'H':
+        hard_words(word_list)   # TODO hard_words_list function return
+    else:
+        print('Please enter a difficulty level')
+
     print("\nFinished 'easy_words, \ncalling 'random_word'")
-    random_word(easy_words(word_list))
+    random_word(easy_words_list)
     print("\nFinished 'random_word, \ncalling 'display word")
 
 
@@ -124,7 +126,7 @@ def main():
                 TODO: index those letters guessed and put in place
                 - display grid "[_ _ _ _ _ _ _ _ _ _]"
                 - character replace in selected word
-       d. Prompting the user for a letter to guess
+       d. Prompting the user for a letter to guesss
     4. Finishing the game and displaying whether the user has won or lost
                 TODO: 8 try loop
     5. Giving the user the option to play again
