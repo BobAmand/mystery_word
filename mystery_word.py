@@ -1,16 +1,17 @@
 # MYSTERY WORD mystery_word.py
 import re
-import random
+from random import randint
 
 def easy_words(word_list):
-    easy_words = []
+    easy_words_list = []         # RETURNS LIST OF EASY WORDS 4-6 CHARACTERS
     for i in range(len(word_list)):
         if len(word_list[i]) >= 4 and len(word_list[i]) <= 6:
-            easy_words.append(word_list[i])
-
-    for c in range(10):
-        print(easy_words[c])
-
+            easy_words_list.append(word_list[i])
+            # easy_words now has a good list of easy words.
+    print("\nTop of Easy word list:")
+    for c in range(5):
+        print(easy_words_list[c])        # printing a few to confirm (\n) included
+    return easy_words_list
 
     """
     Returns a filtered version of the word list with words only containing
@@ -42,6 +43,15 @@ def hard_words(word_list):
 
 
 def random_word(word_list):
+
+    random_num = randint(0,len(word_list)-1)
+    word = word_list[random_num]
+    print("Random word is: {} ". format(word))
+    #return word
+    print("Random word generated: {} ". format(word))
+    return word
+
+
     """
     Returns a random word from the word list.
     """
@@ -87,20 +97,19 @@ def main():
     diff_level = 'E'            # drive into def easy_words()
     f = open('/usr/share/dict/words')
     next = f.read().lower()     # provides lower case list with \n
-    word_list = next.split()
-    print(word_list)
+    word_list = next.split()    # perfect list of words.
+    print("Top of TOTAL list: ")
+    for i in range(5):
+        print(word_list[i])     # prints only a few, includes \n in list.
     # return word_list
-    print("returned 'word_list', calling 'easy_words'")
+    print("\nFinished 'word_list', \ncalling 'easy_words'")
     easy_words(word_list)
+    print("\nFinished 'easy_words, \ncalling 'random_word'")
+    random_word(easy_words(word_list))
+    print("\nFinished 'random_word, \ncalling 'display word")
+
+
     # print(word_list)            # word_list is a list of lower case words.
-
-    # if diff_level == 'E':
-    #     easy_words(word_list)
-    # else:
-    #     print("stopped in main()")
-
-
-
 """
     Runs when the program is called from the command-line.
     TODO - Load all data from external source '/usr/share/dict/words'
