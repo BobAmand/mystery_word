@@ -7,46 +7,42 @@ def easy_words(word_list):
     for i in range(len(word_list)):
         if len(word_list[i]) >= 4 and len(word_list[i]) <= 6:
             easy_words_list.append(word_list[i])
-            # easy_words now has a good list of easy words.
-    print("\nTop of Easy word list:")
-    for c in range(5):
-        print(easy_words_list[c])        # printing a few to confirm (\n) included
     return easy_words_list
 
     """
     Returns a filtered version of the word list with words only containing
     4-6 characters.
-    # - easy_words = words of length between 4 and 6 letters.
-    # - read in based on length
 
     """
-    # TODO
-    pass
-
 
 def medium_words(word_list):
+    medium_words_list = []         # RETURNS LIST OF MEDIUM WORDS 6-8 CHARACTERS
+    for i in range(len(word_list)):
+        if len(word_list[i]) >= 6 and len(word_list[i]) <= 8:
+            medium_words_list.append(word_list[i])
+    return medium_words_list
+
     """
     Returns a filtered version of the word list with words only containing
     6-8 characters.
     """
-    # TODO
-    pass
-
 
 def hard_words(word_list):
+    hard_words_list = []         # RETURNS LIST OF HARD WORDS 8+ CHARACTERS
+    for i in range(len(word_list)):
+        if len(word_list[i]) >= 8:
+            hard_words_list.append(word_list[i])
+    return hard_words_list
+
     """
     Returns a filtered version of the word list with words only containing
     8+ characters.
     """
-    # TODO
-    pass
-
 
 def random_word(word_list):
 
     random_num = randint(0,len(word_list)-1)
     word = word_list[random_num]
-    print("Random word generated: {} ". format(word))
     return word
 
     """
@@ -54,6 +50,37 @@ def random_word(word_list):
     """
 
 def display_word(word, guesses):
+    all_guesses = []
+    all_guesses.append(guesses)
+
+    game_display = list('_'*len(word))
+    for i in range(len(word)):
+        for c in range(len(all_guesses)):
+            if word[i] == all_guesses[c]:
+                game_display[i] = all_guesses[c].upper()
+
+    pretty_game_display = " ".join(game_display)
+    return pretty_game_display
+
+    '''
+    PAUSED
+    display_empty = list('_'*len(word))  # underscore list ['_','_', etc]
+    display_with_guesses = []
+    catch_guess =[]
+    count_guess = 1
+    print("The word has {} letters.\n". format(len(word)))
+    print("There are {} guesses.\n". format(guesses))
+
+    print(" ".join(display_empty))
+
+    while count_guess is < (guesses + 1):
+        guess = input("\nEnter your guess: ").upper()
+        catch_guess.append(guess)
+        count_guess += 1
+        print("Guess {} is {}.\nRemaining guesses = {}". format(count_guess, guess, (guesses-count_guess))
+        disp
+    '''
+
     """
     Returns a string that including blanks (_) and letters from the given word,
     filling in letters based upon the list of guesses.
@@ -88,39 +115,55 @@ def is_word_complete(word, guesses):
 
 
 def main():
-    diff_level = 'E'            # drive into def easy_words()
+    print("\nWelcome to the MYSTERY WORD GAME!\n")
+    # TODO PROMPT FOR DIFFICULTY in caps or not
+    diff_level = 'E'
+    # TODO PROMPT FOR GUESS change to caps
+    guesses = 8     #parameterized guess level
+    guess = 'A'
     f = open('/usr/share/dict/words')
     next = f.read().lower()     # provides lower case list with \n
     word_list = next.split()    # perfect list of words.
-    print("Top of TOTAL list: ")
-    for i in range(5):
-        print(word_list[i])     # prints only a few, includes \n in list.
-    # return word_list
-    print("\nFinished 'word_list', \ncalling 'easy_words'")
+
+    # print("Top of TOTAL list: ")
+    # for i in range(5):
+    #     print(word_list[i])     # prints only a few, includes \n in list.
+    #
+    # print("\nFinished 'word_list', \ncalling 'easy/medium/hard_words'")
+
     if diff_level == 'E':
         easy_words_list = easy_words(word_list)
-    elif diff_level == 'N':
-        medium_words(word_list) # TODO medium_words_list function return
+        word = random_word(easy_words_list)
+        print("EASY level:\n")
+        display_word(word, guesses)
+# TODO display_word(word, guess)
+    elif diff_level == 'M':
+        medium_words_list = medium_words(word_list)
+        word = random_word(medium_words_list)
+        print("MEDIUM level: your word has {} letters.". format(len(word)))
+        print("Your first guess was {}.". format(guess.upper()))
+# TODO display_word(word, guess)
     elif diff_level == 'H':
-        hard_words(word_list)   # TODO hard_words_list function return
+        hard_words_list = hard_words(word_list)
+        word = random_word(hard_words_list)
+        print("HARD level: your word has {} letters.". format(len(word)))
+        print("Your first guess was {}.". format(guess.upper()))
+# TODO display_word(word, guess)
     else:
         print('Please enter a difficulty level')
 
-    print("\nFinished 'easy_words, \ncalling 'random_word'")
-    word = random_word(easy_words_list)
-    print("\nFinished 'random_word, \ncalling 'display word")
-    print("Here is the random word from main(): {}". format(word))
-    guess = input("What is your first letter guess? \nEnter one CAP letter:")
+    # print("\nFinished 'easy/medium/hard'_words, \ncalling 'random_word'")
+    # print(word)
+    # print("\nFinished 'random_word, \ncalling 'display word")
+    # print("Here is the random word from main(): {}". format(word))
 
 
-    # print(word_list)            # word_list is a list of lower case words.
 """
     Runs when the program is called from the command-line.
     TODO - Load all data from external source '/usr/share/dict/words'
 
     1. Prompts the user for a difficulty level
     2. Sets up the game based upon the difficulty level
-                TOD0: direct to the appropriate word filter function.
     3. Performs the game loop, consisting of:
        a. Printing the word in progress, using _ for unguessed letters
        b. Printing the number of guesses remaining
@@ -133,7 +176,6 @@ def main():
                 TODO: 8 try loop
     5. Giving the user the option to play again
 """
-    # TODO
 
 if __name__ == '__main__':
     main()
