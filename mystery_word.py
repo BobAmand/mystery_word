@@ -107,8 +107,10 @@ def main():
         print('Please enter a difficulty level')
 
     print("\nFinished 'easy_words, \ncalling 'random_word'")
-    random_word(easy_words_list)
+    word = random_word(easy_words_list)
     print("\nFinished 'random_word, \ncalling 'display word")
+    print("Here is the random word from main(): {}". format(word))
+    guess = input("What is your first letter guess? \nEnter one CAP letter:")
 
 
     # print(word_list)            # word_list is a list of lower case words.
