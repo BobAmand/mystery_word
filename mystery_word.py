@@ -50,112 +50,100 @@ def random_word(word_list):
     """
 
 def display_word(word, guesses):
-    all_guesses = []
-    all_guesses.append(guesses)
-
     game_display = list('_'*len(word))
     for i in range(len(word)):
-        for c in range(len(all_guesses)):
-            if word[i] == all_guesses[c]:
-                game_display[i] = all_guesses[c].upper()
+        for c in range(len(guesses)):
+            if word[i] == guesses[c]:
+                game_display[i] = guesses[c].upper()
 
     pretty_game_display = " ".join(game_display)
     return pretty_game_display
 
-    '''
-    PAUSED
-    display_empty = list('_'*len(word))  # underscore list ['_','_', etc]
-    display_with_guesses = []
-    catch_guess =[]
-    count_guess = 1
-    print("The word has {} letters.\n". format(len(word)))
-    print("There are {} guesses.\n". format(guesses))
-
-    print(" ".join(display_empty))
-
-    while count_guess is < (guesses + 1):
-        guess = input("\nEnter your guess: ").upper()
-        catch_guess.append(guess)
-        count_guess += 1
-        print("Guess {} is {}.\nRemaining guesses = {}". format(count_guess, guess, (guesses-count_guess))
-        disp
-    '''
-
     """
     Returns a string that including blanks (_) and letters from the given word,
     filling in letters based upon the list of guesses.
-        # - loop to prompt for 8 guesses
-        # - Any size word to be entered
-        # - size of the pattern = len(word)
 
     There should be spaces between each blank _ and each letter. Each letter
     should be capitalized for display.
-        # - insert the space with 'sep=' '' embedded function __.upper()
 
     For example, if the word is BOMBARD and the letters guessed are a, b,
     and d, this function should return 'B _ _ B A _ D'.
-        # - loop through a comparison between the word and the guessed letter.
-        # - loop through the display to swap out 'space' indexed letters.
-        # - adjust the index to count the space between letters
-        # - swap out the underscore with the letter at all locations
 
     """
-    # TODO
-    pass
-
 
 def is_word_complete(word, guesses):
+    word_bin = []
+    count = 0
+    for i in range(len(word)):
+        if word[i] not in word_bin:
+            word_bin.append(word[i])   # unique letters in the word
+    for i in range(len(word_bin)):
+        for c in range(len(guesses)):
+            if word_bin[i] == guesses[c]:
+                count += 1              # count everytime quess matches unique word_bin
+    if count == len(word_bin):
+        return True
+    else:
+        return False
+
     """
     Returns True if the list of guesses covers every letter in the word,
     otherwise returns False.
-
     """
-    # TODO
-    pass
-
 
 def main():
     print("\nWelcome to the MYSTERY WORD GAME!\n")
-    # TODO PROMPT FOR DIFFICULTY in caps or not
-    diff_level = 'E'
-    # TODO PROMPT FOR GUESS change to caps
-    guesses = 8     #parameterized guess level
-    guess = 'A'
+
+    print("Select your difficulty level: \n")
+    diff_level = input("E for easy, M for medium, H for hard: \n")
+
+    # if diff_level != "E" or diff_level != "M" or diff_level != "H":
+    #     print("If you want to quit type Q\n otherwise select E, M or H.")
+
+    maximum_guesses = 8     #parameterized guess level
+
     f = open('/usr/share/dict/words')
     next = f.read().lower()     # provides lower case list with \n
     word_list = next.split()    # perfect list of words.
-
-    # print("Top of TOTAL list: ")
-    # for i in range(5):
-    #     print(word_list[i])     # prints only a few, includes \n in list.
-    #
-    # print("\nFinished 'word_list', \ncalling 'easy/medium/hard_words'")
 
     if diff_level == 'E':
         easy_words_list = easy_words(word_list)
         word = random_word(easy_words_list)
         print("EASY level:\n")
-        display_word(word, guesses)
-# TODO display_word(word, guess)
+
     elif diff_level == 'M':
         medium_words_list = medium_words(word_list)
         word = random_word(medium_words_list)
-        print("MEDIUM level: your word has {} letters.". format(len(word)))
-        print("Your first guess was {}.". format(guess.upper()))
-# TODO display_word(word, guess)
+        print("MEDIUM level:\n")
+
     elif diff_level == 'H':
         hard_words_list = hard_words(word_list)
         word = random_word(hard_words_list)
-        print("HARD level: your word has {} letters.". format(len(word)))
-        print("Your first guess was {}.". format(guess.upper()))
-# TODO display_word(word, guess)
+        print("HARD level:\n")
     else:
         print('Please enter a difficulty level')
 
-    # print("\nFinished 'easy/medium/hard'_words, \ncalling 'random_word'")
-    # print(word)
-    # print("\nFinished 'random_word, \ncalling 'display word")
-    # print("Here is the random word from main(): {}". format(word))
+    print("Your word has {} letters.\n". format(len(word)))
+    guesses = []
+    while is_word_complete(word, guesses) == False:
+        display_word(word, guesses)
+        for i in range(1, maximum_guesses):
+            print("This is guess #: {}". format(range[i]))
+            guess = input("Enter your guess as a single letter:")
+            guesses.append(guess)
+        print("You did not guess.  \nThe word was {}.". format(word))
+        repeat = input("Would you like to play again?, Y or N ")
+        if repeat == "Y":
+            main()
+        else:
+            break
+    print("You guessed the word!\n")
+    repeat = input("Would you like to play again?, Y or N ")
+    if repeat == "Y":
+        main()
+    else:
+        print("Thanks for playing.")
+        quit()
 
 
 """
@@ -168,12 +156,8 @@ def main():
        a. Printing the word in progress, using _ for unguessed letters
        b. Printing the number of guesses remaining
        c. Printing the letters that have been guessed so far
-                TODO: index those letters guessed and put in place
-                - display grid "[_ _ _ _ _ _ _ _ _ _]"
-                - character replace in selected word
        d. Prompting the user for a letter to guesss
     4. Finishing the game and displaying whether the user has won or lost
-                TODO: 8 try loop
     5. Giving the user the option to play again
 """
 
