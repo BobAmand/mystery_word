@@ -57,7 +57,7 @@ def display_word(word, guesses):
                 game_display[i] = guesses[c].upper()
 
     pretty_game_display = " ".join(game_display)
-    return pretty_game_display
+    print(pretty_game_display)
 
     """
     Returns a string that including blanks (_) and letters from the given word,
@@ -90,6 +90,13 @@ def is_word_complete(word, guesses):
     Returns True if the list of guesses covers every letter in the word,
     otherwise returns False.
     """
+def repeat():
+    repeat = input("Would you like to play again?, Y or N ")
+    if repeat == "Y":
+        main()
+    else:
+        print("Thanks for playing")
+        quit()
 
 def main():
     print("\nWelcome to the MYSTERY WORD GAME!\n")
@@ -101,6 +108,7 @@ def main():
     #     print("If you want to quit type Q\n otherwise select E, M or H.")
 
     maximum_guesses = 8     #parameterized guess level
+    guess_count = 1
 
     f = open('/usr/share/dict/words')
     next = f.read().lower()     # provides lower case list with \n
@@ -124,27 +132,30 @@ def main():
         print('Please enter a difficulty level')
 
     print("Your word has {} letters.\n". format(len(word)))
+
     guesses = []
+
     while is_word_complete(word, guesses) == False:
         display_word(word, guesses)
-        for i in range(1, maximum_guesses):
-            print("This is guess #: {}". format(range[i]))
-            guess = input("Enter your guess as a single letter:")
-            guesses.append(guess)
-        print("You did not guess.  \nThe word was {}.". format(word))
-        repeat = input("Would you like to play again?, Y or N ")
-        if repeat == "Y":
-            main()
-        else:
-            break
-    print("You guessed the word!\n")
+        print("\nThis is guess #: {}". format(guess_count))
+        guess = input("Enter your guess as a single letter: ")
+        guesses.append(guess)
+        guess_count += 1
+        if guess_count == maximum_guesses:
+            print("You did not guess.  \nThe word was {}.". format(word))
+            repeat = input("Would you like to play again?, Y or N ")
+            if repeat == "Y":
+                main()
+            else:
+                print("Thanks for playing.")
+                quit()
+        print("You guessed the word!\n")
     repeat = input("Would you like to play again?, Y or N ")
     if repeat == "Y":
         main()
     else:
         print("Thanks for playing.")
         quit()
-
 
 """
     Runs when the program is called from the command-line.
