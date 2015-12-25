@@ -1,6 +1,7 @@
 # MYSTERY WORD mystery_word.py
-import re
+# import re
 from random import randint
+
 
 def easy_words(word_list):
     easy_words_list = []         # RETURNS LIST OF EASY WORDS 4-6 CHARACTERS
@@ -15,8 +16,9 @@ def easy_words(word_list):
 
     """
 
+
 def medium_words(word_list):
-    medium_words_list = []         # RETURNS LIST OF MEDIUM WORDS 6-8 CHARACTERS
+    medium_words_list = []     # RETURNS LIST OF MEDIUM WORDS 6-8 CHARACTERS
     for i in range(len(word_list)):
         if len(word_list[i]) >= 6 and len(word_list[i]) <= 8:
             medium_words_list.append(word_list[i])
@@ -26,6 +28,7 @@ def medium_words(word_list):
     Returns a filtered version of the word list with words only containing
     6-8 characters.
     """
+
 
 def hard_words(word_list):
     hard_words_list = []         # RETURNS LIST OF HARD WORDS 8+ CHARACTERS
@@ -39,15 +42,16 @@ def hard_words(word_list):
     8+ characters.
     """
 
-def random_word(word_list):
 
-    random_num = randint(0,len(word_list)-1)
+def random_word(word_list):
+    random_num = randint(0, len(word_list)-1)
     word = word_list[random_num]
     return word
 
     """
     Returns a random word from the word list.
     """
+
 
 def display_word(word, guesses):
     game_display = list('_'*len(word))
@@ -71,6 +75,7 @@ def display_word(word, guesses):
 
     """
 
+
 def is_word_complete(word, guesses):
     word_bin = []
     count = 0
@@ -80,7 +85,7 @@ def is_word_complete(word, guesses):
     for i in range(len(word_bin)):
         for c in range(len(guesses)):
             if word_bin[i] == guesses[c]:
-                count += 1              # count everytime quess matches unique word_bin
+                count += 1              # count when quess unique word_bin
     if count == len(word_bin):
         return True
     else:
@@ -90,6 +95,8 @@ def is_word_complete(word, guesses):
     Returns True if the list of guesses covers every letter in the word,
     otherwise returns False.
     """
+
+
 def repeat():
     repeat = input("Would you like to play again?, Y or N ")
     if repeat == "Y":
@@ -97,6 +104,7 @@ def repeat():
     else:
         print("Thanks for playing")
         quit()
+
 
 def main():
     print("\nWelcome to the MYSTERY WORD GAME!\n")
@@ -107,7 +115,7 @@ def main():
     # if diff_level != "E" or diff_level != "M" or diff_level != "H":
     #     print("If you want to quit type Q\n otherwise select E, M or H.")
 
-    maximum_guesses = 8     #parameterized guess level
+    maximum_guesses = 8     # parameterized guess level
     guess_count = 1
 
     f = open('/usr/share/dict/words')
