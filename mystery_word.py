@@ -61,6 +61,7 @@ def display_word(word, guesses):
                 game_display[i] = guesses[c].upper()
 
     pretty_game_display = " ".join(game_display)
+    return(pretty_game_display)
     print(pretty_game_display)
 
     """
@@ -87,6 +88,7 @@ def is_word_complete(word, guesses):
             if word_bin[i] == guesses[c]:
                 count += 1              # count when quess unique word_bin
     if count == len(word_bin):
+        print("You guessed the word")
         return True
     else:
         return False
@@ -152,12 +154,12 @@ def main():
         if guess_count == maximum_guesses:
             print("You did not guess.  \nThe word was {}.". format(word))
             repeat = input("Would you like to play again?, Y or N ")
-            if repeat == "Y":
+            if repeat == "Y" or repeat == "y":
                 main()
             else:
                 print("Thanks for playing.")
                 quit()
-        print("You guessed the word!\n")
+            print("You guessed the word!\n")
     repeat = input("Would you like to play again?, Y or N ")
     if repeat == "Y":
         main()
